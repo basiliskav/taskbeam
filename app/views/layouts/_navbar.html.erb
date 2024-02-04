@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="<%= tasks_path %>">
+      <%= image_tag 'image-2.png', alt: 'TaskBeam logo', height: '30' %>
+      TaskBeam
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <%= link_to 'Home', tasks_path, class: 'nav-link' %>
+        </li>
+        <!-- Add more navigation items here -->
+      </ul>
+    </div>
+  </div>
+</nav>

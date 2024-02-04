@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @day.strftime('%B %d, %Y') %></title>
+  <style>
+    body { font-family: Helvetica, sans-serif; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #dddddd; text-align: left; padding: 20px; } /* Increased padding to make rows bigger */
+    th { background-color: #ffdddd; }
+    h1 { text-align: center; }
+    .bigger-checkbox {
+      -webkit-transform: scale(1.5); /* Safari and Chrome */
+      transform: scale(1.5); /* Default */
+      padding: 10px;
+      margin-right: 5px; /* Optional: to give some space if the checkbox labels are inline */
+    }
+    .center { text-align: center; vertical-align: middle; }
+    .thank-you {
+      margin-top: 40px; /* Adjust the space between the table and the thank you message */
+      text-align: center;
+      font-size: 18px; /* Adjust the size of the text */
+      font-style: italic;
+      color: #333; /* Adjust the color of the text */
+    }
+  </style>
+</head>
+<body>
+  <h1><%= l(@day, format: :long) %></h1>
+  <% if @tasks.present? %>
+    <table>
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Σχόλια</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @tasks.each do |task| %>
+          <tr>
+            <td><%= task.title %></td>
+            <td><%= task.details %></td>
+            <td class="center"><input type="checkbox" class="bigger-checkbox"></td> <!-- Disabled empty checkbox -->
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+  <div class="thank-you">
+    Ευχαριστούμε πάρα πάρα πολυ!
+  </div>
+  <div class="thank-you">
+    Βασίλης - Αναστασία
+  </div>
+  <div class="thank-you">
+    ❤️❤️❤️❤️
+  </div>
+</body>
+</html>

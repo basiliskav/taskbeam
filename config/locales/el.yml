@@ -1,0 +1,41 @@
+el:
+  date:
+    formats:
+      default: "%d/%m/%Y"
+      long: "%-d %b. %Y"
+    day_names: ["Κυριακή", "Δευτέρα", "Τρίτη", "Τετάρτη", "Πέμπτη", "Παρασκευή", "Σάββατο"]
+    abbr_day_names: ["Κυρ", "Δευ", "Τρι", "Τετ", "Πεμ", "Παρ", "Σαβ"]
+    month_names:
+      - ~ # first element is nil so that January is 1, not 0
+      - Ιανουάριος
+      - Φεβρουάριος
+      - Μάρτιος
+      - Απρίλιος
+      - Μάιος
+      - Ιούνιος
+      - Ιούλιος
+      - Αύγουστος
+      - Σεπτέμβριος
+      - Οκτώβριος
+      - Νοέμβριος
+      - Δεκέμβριος
+    abbr_month_names:
+      - ~ # similarly, first element is nil
+      - Ιαν
+      - Φεβ
+      - Μαρ
+      - Απρ
+      - Μαι
+      - Ιουν
+      - Ιουλ
+      - Αυγ
+      - Σεπ
+      - Οκτ
+      - Νοε
+      - Δεκ
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
+  datetime:
+    formats:
+      default: "%d/%m/%Y %H:%M"

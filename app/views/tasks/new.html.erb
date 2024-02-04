@@ -1,21 +1,29 @@
-<!-- app/views/tasks/new.html.erb -->
-
-<h1>New Task for <%= @task.day.strftime('%B %d, %Y') %></h1>
-
-<%= form_with model: @task, local: true do |form| %>
-  <%= form.hidden_field :day %>
-
-  <div class="field">
-    <%= form.label :title %><br>
-    <%= form.text_field :title %>
+<div class="container p-4">
+  <div class="row mb-3 align-items-center">
+    <div class="col-md-3">
+      <%= link_to 'Back', show_by_day_tasks_path(day: @task.day), class: "btn btn-secondary" %>
+    </div>
+    <div class="col-md-6 text-center">
+      <h2>New Task for <%= @task.day.strftime('%B %d, %Y') %></h2>
+    </div>
   </div>
-  <div class="field">
-    <%= form.label :details %><br>
-    <%= form.text_area :details %>
-  </div>
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
 
-<%= link_to 'Back', show_by_day_tasks_path(day: @task.day) %>
+  <%= form_with model: @task, local: true, html: {class: "needs-validation"}, novalidate: true do |form| %>
+    <div class="form-group">
+      <%= form.hidden_field :day %>
+
+      <div class="mb-3">
+        <%= form.label :title, class: 'form-label' %>
+        <%= form.text_field :title, class: 'form-control', aria: {describedby: "titleHelp"}, placeholder: "Enter title" %>
+        <small id="titleHelp" class="form-text text-muted">Your task's title.</small>
+      </div>
+      <div class="mb-3">
+        <%= form.label :details, class: 'form-label' %>
+        <%= form.text_area :details, class: 'form-control', rows: 3, placeholder: "Task details" %>
+      </div>
+      <div class="actions">
+        <%= form.submit class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+</div>

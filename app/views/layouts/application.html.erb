@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", defer: true %>
   </head>
   <body>
-    <%= flash.each do |name, msg| %>
-      <%= content_tag(:div, msg, class: "flash #{name}") %>
+    <%= render 'layouts/navbar' %>
+
+    <% flash.each do |type, message| %>
+      <div class="alert alert-<%= bootstrap_class_for_flash(type) %>"><%= message %></div>
     <% end %>
 
     <%= yield %>

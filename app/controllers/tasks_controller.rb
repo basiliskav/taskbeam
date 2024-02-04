@@ -25,7 +25,8 @@ class TasksController < ApplicationController
     
     if @task.save
       # Redirect to show_by_day for the specific day of the task
-      redirect_to show_by_day_tasks_path(day: @task.day), notice: 'Task was successfully created.'
+      flash[:notice] = 'Task was successfully created.'
+      redirect_to show_by_day_tasks_path(day: @task.day)
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,7 +34,8 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to show_by_day_tasks_path(day: @task.day), notice: 'Task was successfully updated.'
+      flash[:notice] = 'Task was successfully updated.'
+      redirect_to show_by_day_tasks_path(day: @task.day)
     else
       render :edit
     end
@@ -45,7 +47,8 @@ class TasksController < ApplicationController
     task_title = @task.title
     @task.destroy
 
-    redirect_to show_by_day_tasks_path(day: task_day), notice: "Task '#{task_title}' was successfully deleted."
+    flash[:alert] = "Task '#{task_title}' was successfully deleted."
+    redirect_to show_by_day_tasks_path(day: task_day)
   end
 
   def select_day
@@ -54,6 +57,16 @@ class TasksController < ApplicationController
   def show_by_day
     @day = Date.parse(params[:day])
     @tasks = Task.where(day: @day).order(created_at: :asc)
+
+    respond_to do |format|
+      format.html # continues to render .html.erb view
+      Rails.logger.debug "Rendering PDF for tasks on #{@day}"
+
+      format.pdf do
+        render pdf: 'app/views/tasks/show_by_day.pdf.erb',
+               encoding: 'UTF8'
+      end
+    end
   end
 
   private

@@ -1,22 +1,49 @@
-<h1>Tasks for <%= @day.strftime('%B %d, %Y') %></h1>
-
-<% @tasks.each do |task| %>
-  <div>
-    <strong><%= task.title %></strong>
-    <p><%= task.details %></p>
-    <%= check_box_tag "task_#{task.id}", "completed", task.completed %> Completed
-    
-    <!-- Edit Link -->
-    <%= link_to 'Edit', edit_task_path(task), class: "btn btn-primary" %>
-    
-    <!-- Delete Link -->
-    <%= button_to 'Delete', task_path(task),
-                method: :delete,
-                data: { confirm: 'Are you sure?' },
-                class: "btn btn-danger" %>
+<div class="container p-4">
+  <div class="row mb-3 align-items-center"> <!-- Ensure vertical alignment and spacing below the row -->
+    <div class="col-md-3">
+      <%= link_to 'Back', tasks_path, class: "btn btn-secondary" %> <!-- Left aligned Back button -->
+    </div>
+    <div class="col-md-6 text-center">
+      <h2>Tasks for <%= l(@day, format: :long) %></h2>
+    </div>
+    <div class="col-md-3 text-end">
+      <%= link_to 'Add New Task', new_task_path(day: @day), class: "btn btn-primary" %> <!-- Right aligned Add New Task button -->
+    </div>
   </div>
-<% end %>
 
-<%= link_to 'Add New Task', new_task_path(day: @day) %>
+  <% if @tasks.present? %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Task</th>
+          <th scope="col">Description</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @tasks.each do |task| %>
+          <tr>
+            <th><%= task.title %></th>
+            <td><%= task.details %></td>        
+            <td>
+              <!-- Edit Link -->
+              <%= link_to 'Edit', edit_task_path(task), class: "btn btn-primary" %>
+            </td>
+            <td>
+              <!-- Delete Link -->
+              <%= button_to 'Delete', task_path(task),
+                          method: :delete,
+                          data: { confirm: 'Are you sure?' },
+                          class: "btn btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="text-info text-center">No tasks found for this day.</p>
+  <% end %>
 
-<%= link_to 'Back', tasks_path %>
+  <%= link_to 'Print as PDF', show_by_day_tasks_path(day: @day, format: :pdf), class: "btn btn-success" %>
+</div>
