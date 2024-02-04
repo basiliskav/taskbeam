@@ -1,0 +1,22 @@
+<h1>Tasks for <%= @day.strftime('%B %d, %Y') %></h1>
+
+<% @tasks.each do |task| %>
+  <div>
+    <strong><%= task.title %></strong>
+    <p><%= task.details %></p>
+    <%= check_box_tag "task_#{task.id}", "completed", task.completed %> Completed
+    
+    <!-- Edit Link -->
+    <%= link_to 'Edit', edit_task_path(task), class: "btn btn-primary" %>
+    
+    <!-- Delete Link -->
+    <%= button_to 'Delete', task_path(task),
+                method: :delete,
+                data: { confirm: 'Are you sure?' },
+                class: "btn btn-danger" %>
+  </div>
+<% end %>
+
+<%= link_to 'Add New Task', new_task_path(day: @day) %>
+
+<%= link_to 'Back', tasks_path %>

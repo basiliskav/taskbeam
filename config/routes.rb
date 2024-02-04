@@ -7,4 +7,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  get 'tasks/select_day', to: 'tasks#select_day', as: 'select_day_tasks'
+  get 'tasks/show_by_day', to: 'tasks#show_by_day', as: 'show_by_day_tasks'
+
+  post 'tasks/show_by_day', to: 'tasks#show_by_day'
+  resources :tasks
 end

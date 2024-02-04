@@ -1,0 +1,24 @@
+<h1>Task Listing</h1>
+
+<%= form_with url: show_by_day_tasks_path, method: :get, local: true do |form| %>
+  <div class="field">
+    <%= form.label :day, "Select a Day:" %>
+    <%= form.date_field :day, value: params[:day] || Date.today, required: true %>
+  </div>
+  <div class="actions">
+    <%= form.submit "Show Tasks" %>
+  </div>
+<% end %>
+
+<% if @tasks && @tasks.any? %>
+  <h2>Tasks for <%= @day.strftime('%B %d, %Y') %></h2>
+  <% @tasks.each do |task| %>
+    <div>
+      <strong><%= task.title %></strong>
+      <p><%= task.details %></p>
+      <%= check_box_tag "task_#{task.id}", "completed", task.completed %> Completed
+    </div>
+  <% end %>
+<% else %>
+  <p>No tasks found for this day.</p>
+<% end %>

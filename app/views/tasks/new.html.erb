@@ -1,0 +1,21 @@
+<!-- app/views/tasks/new.html.erb -->
+
+<h1>New Task for <%= @task.day.strftime('%B %d, %Y') %></h1>
+
+<%= form_with model: @task, local: true do |form| %>
+  <%= form.hidden_field :day %>
+
+  <div class="field">
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </div>
+  <div class="field">
+    <%= form.label :details %><br>
+    <%= form.text_area :details %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', show_by_day_tasks_path(day: @task.day) %>
